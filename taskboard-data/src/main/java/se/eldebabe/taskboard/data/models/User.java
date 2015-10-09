@@ -89,6 +89,24 @@ public class User extends AbstractEntity {
 	public Collection<WorkItem> getWorkItems() {
 		return workItems;
 	}
+	
+	public boolean hasWorkItem(WorkItem workitem){
+		for(WorkItem workItem2: workItems){
+			if(workItem2.getId().equals(workitem.getId())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean removeWorkItem(WorkItem workItem){
+		for(WorkItem workItem2: workItems){
+			if(workItem2.getId().equals(workItem.getId())){
+				return workItems.remove(workItem2);
+			}
+		}
+		return false;
+	}
 
 	public WorkItem addWorkItem(WorkItem workItem) {
 		workItems.add(workItem);

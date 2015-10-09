@@ -34,6 +34,7 @@ import com.google.gson.JsonObject;
 
 import se.eldebabe.taskboard.data.models.Issue;
 import se.eldebabe.taskboard.data.models.WorkItem;
+import se.eldebabe.taskboard.data.services.IssueService;
 import se.eldebabe.taskboard.data.services.WorkItemService;
 
 @Path("workitems")
@@ -43,11 +44,13 @@ public final class WorkItemWebService {
 
 	private static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 	private static WorkItemService workItemService = new WorkItemService();
+	private static IssueService issueService = new IssueService();
 
 	static {
 		context.scan("se.eldebabe.taskboard.data.configs");
 		context.refresh();
 		workItemService = context.getBean(WorkItemService.class);
+		issueService = context.getBean(IssueService.class);
 	}
 
 	@Context
@@ -56,6 +59,7 @@ public final class WorkItemWebService {
 	@POST
 	public final Response saveWorkItem(WorkItem workItem) {
 
+		issueService.saveIssue(workItem.getIssue());
 		workItem = workItemService.saveWorkItem(workItem);
 		if (null != workItem) {
 			final URI location = uriInfo.getAbsolutePathBuilder().path(workItem.getId().toString()).build();
@@ -112,6 +116,29 @@ public final class WorkItemWebService {
 	}
 
 	@PUT
+	@Path("{workItemId}")
+	public final Response updateWorkItem(@PathParam("workItemId") final Long id, final WorkItem newWorkItem) {
+		
+		WorkItem workItem = workItemService.findWorkItem(newWorkItem.getId());
+		if (workItem != null) {
+
+			if (newWorkItem.getIssue() != null) {
+				if(newWorkItem.getIssue().getId() == null){
+					issueService.saveIssue(newWorkItem.getIssue());
+				}else{
+					issueService.updateIssue(newWorkItem.getIssue());
+				}
+			}
+			
+			workItem = workItemService.saveWorkItem(newWorkItem);
+
+			return Response.ok(workItem).build();
+		} else {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+	}
+
+	@PUT
 	@Path("{workItemId}/status")
 	public final Response changeStatus(@PathParam("workItemId") final Long id, final String json) {
 		se.eldebabe.taskboard.data.models.Status status;
@@ -138,7 +165,6 @@ public final class WorkItemWebService {
 	@Path("{workItemId}")
 	public final Response deleteWorkItem(@PathParam("workItemId") final Long id) {
 		WorkItem workItem = workItemService.findWorkItem(id);
-
 		if (null != workItem) {
 			workItemService.deleteWorkItem(id);
 			return Response.ok(workItem).build();

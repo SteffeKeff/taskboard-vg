@@ -147,6 +147,16 @@ public class UserWebService {
 		WorkItem workItem = workItemService.findWorkItem(id);
 
 		if (null != user && null != workItem) {
+			
+			ArrayList<User> allUsers = userService.getAllUsers();
+			for(User oneUser: allUsers){
+				if(oneUser.hasWorkItem(workItem)){
+					oneUser.removeWorkItem(workItem);
+					userService.updateUser(oneUser);
+					break;
+				}
+			}
+			
 			user.addWorkItem(workItem);
 			user = userService.updateUser(user);
 			return Response.ok(user).build();
@@ -154,6 +164,24 @@ public class UserWebService {
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 	}
+	
+
+	@DELETE
+	@Path("{userId}/workitem/{itemId}")
+	public Response deleteWorkItemFromUser(@PathParam("userId") final String userId, @PathParam("itemId") final long itemId) {
+		User user = userService.findUser(userId);
+
+		WorkItem workItem = workItemService.findWorkItem(itemId);
+
+		if (null != user && null != workItem && user.hasWorkItem(workItem)) {
+			System.out.println(user.removeWorkItem(workItem));
+			user = userService.updateUser(user);
+			return Response.ok(workItem).build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+	
 
 	@GET
 	@Path("{userId}/workitems")

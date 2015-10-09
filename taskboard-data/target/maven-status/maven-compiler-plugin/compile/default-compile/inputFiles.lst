@@ -1,0 +1,16 @@
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/WorkItem.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/IssueRepository.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/IssueService.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/TeamRepository.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/Status.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/WorkItemRepository.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/Issue.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/UserRepository.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/TeamService.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/AbstractEntity.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/configs/InfrastructureConfig.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/WorkItemService.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/configs/ServiceConfig.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/UserService.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/User.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/Team.java

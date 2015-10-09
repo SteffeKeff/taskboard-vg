@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.sun.istack.internal.NotNull;
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "work_items")
@@ -31,7 +29,6 @@ public class WorkItem extends AbstractEntity {
 	private Status status;
 
 	@LastModifiedDate
-	@NotNull
 	@Column(name = "date")
 	private Long date;
 
@@ -39,7 +36,8 @@ public class WorkItem extends AbstractEntity {
 		return date;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	//cascade = CascadeType.ALL
+	@OneToOne(cascade= CascadeType.REMOVE,fetch = FetchType.EAGER)
 	private Issue issue;
 
 	protected WorkItem() {
@@ -49,6 +47,21 @@ public class WorkItem extends AbstractEntity {
 		status = Status.NOT_STARTED;
 		this.title = title;
 		this.description = description;
+	}
+
+	public WorkItem(Long id, String title, String description, Status status) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.status = status;
+	}
+
+	public WorkItem(Long id, String title, String description, Status status, Issue issue) {
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.status = status;
+		this.issue = issue;
 	}
 
 	public String getTitle() {
@@ -74,5 +87,4 @@ public class WorkItem extends AbstractEntity {
 	public void setIssue(Issue issue) {
 		this.issue = issue;
 	}
-
 }

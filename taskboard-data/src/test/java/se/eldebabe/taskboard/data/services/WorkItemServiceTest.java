@@ -17,6 +17,7 @@ public final class WorkItemServiceTest {
 
 	private static AnnotationConfigApplicationContext context;
 	private static WorkItemService workItemService;
+	private static IssueService issueService;
 	private WorkItem workItem;
 
 	@BeforeClass
@@ -25,6 +26,7 @@ public final class WorkItemServiceTest {
 		context.scan("se.eldebabe.taskboard.data.configs");
 		context.refresh();
 		workItemService = context.getBean(WorkItemService.class);
+		issueService = context.getBean(IssueService.class);
 	}
 
 	@Test
@@ -81,6 +83,7 @@ public final class WorkItemServiceTest {
 		workItem = new WorkItem("Skapa hemsida2123", "Lite html, lite css, gärna mycket javascript!");
 		Issue issue = new Issue("Jaha ja detta var ju ett issue då va");
 		workItem.setIssue(issue);
+		issueService.saveIssue(issue);
 		workItemService.saveWorkItem(workItem);
 		assertThat("work item from db should have same issue as workItem", null,
 				not(workItemService.findWorkItem(workItem.getId()).getIssue()));
@@ -94,6 +97,9 @@ public final class WorkItemServiceTest {
 		Issue issue2 = new Issue("Jaha ja detta var ju ett issue då va IGEN IGEN IGEN ooooooo");
 		workItem.setIssue(issue);
 		workItem2.setIssue(issue2);
+
+		issueService.saveIssue(issue);
+		issueService.saveIssue(issue2);
 		workItemService.saveWorkItem(workItem);
 		workItemService.saveWorkItem(workItem2);
 		assertThat("should have two work items with issuies", 2, is(workItemService.findWorkItemsWithIssue().size()));
