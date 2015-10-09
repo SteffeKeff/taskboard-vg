@@ -59,7 +59,10 @@ public final class WorkItemWebService {
 	@POST
 	public final Response saveWorkItem(WorkItem workItem) {
 
-		issueService.saveIssue(workItem.getIssue());
+		if(workItem.getIssue() != null){
+			issueService.saveIssue(workItem.getIssue());	
+		}
+
 		workItem = workItemService.saveWorkItem(workItem);
 		if (null != workItem) {
 			final URI location = uriInfo.getAbsolutePathBuilder().path(workItem.getId().toString()).build();

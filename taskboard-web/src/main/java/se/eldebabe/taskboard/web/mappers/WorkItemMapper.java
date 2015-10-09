@@ -91,6 +91,7 @@ public final class WorkItemMapper implements MessageBodyReader<WorkItem>, Messag
 			
 			final String title = WorkItemJson.get("title").getAsString();
 			final String description = WorkItemJson.get("description").getAsString();
+		
 			if(WorkItemJson.has("id")){
 				final Long id = WorkItemJson.get("id").getAsLong();
 				final Status status = Status.valueOf(WorkItemJson.get("status").getAsString().toUpperCase());
@@ -103,14 +104,13 @@ public final class WorkItemMapper implements MessageBodyReader<WorkItem>, Messag
 							final Issue issue = new Issue(issueId, issueDescription);
 							return new WorkItem(id, title, description, status, issue);
 						}else{
-							final Issue issue = new Issue(description);
+							final Issue issue = new Issue(issueDescription);
 							return new WorkItem(id, title, description, status, issue);
 						}
 					}
 				}
 				return new WorkItem(id, title, description, status);
 			}
-
 			return new WorkItem(title, description);
 		}
 
