@@ -14,6 +14,11 @@ public class Issue extends AbstractEntity {
 	protected Issue() {
 	}
 
+	public Issue(Long id, String description) {
+		this.id = id;
+		this.description = description;
+	}
+
 	public Issue(String description) {
 		this.description = description;
 	}

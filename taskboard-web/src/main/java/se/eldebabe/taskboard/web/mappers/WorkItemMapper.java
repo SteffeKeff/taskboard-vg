@@ -34,6 +34,8 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 import com.google.gson.stream.JsonWriter;
 
+import se.eldebabe.taskboard.data.models.Issue;
+import se.eldebabe.taskboard.data.models.Status;
 import se.eldebabe.taskboard.data.models.WorkItem;
 
 @Provider
@@ -86,9 +88,29 @@ public final class WorkItemMapper implements MessageBodyReader<WorkItem>, Messag
 		public WorkItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 				throws JsonParseException {
 			final JsonObject WorkItemJson = json.getAsJsonObject();
+			
 			final String title = WorkItemJson.get("title").getAsString();
 			final String description = WorkItemJson.get("description").getAsString();
-
+		
+			if(WorkItemJson.has("id")){
+				final Long id = WorkItemJson.get("id").getAsLong();
+				final Status status = Status.valueOf(WorkItemJson.get("status").getAsString().toUpperCase());
+				if(WorkItemJson.has("issue")){
+					JsonObject issueJson = WorkItemJson.get("issue").getAsJsonObject();
+					final String issueDescription = issueJson.get("description").getAsString();
+					if(issueDescription.trim().length() != 0){
+						if(issueJson.has("id")){
+							final Long issueId = issueJson.get("id").getAsLong();
+							final Issue issue = new Issue(issueId, issueDescription);
+							return new WorkItem(id, title, description, status, issue);
+						}else{
+							final Issue issue = new Issue(issueDescription);
+							return new WorkItem(id, title, description, status, issue);
+						}
+					}
+				}
+				return new WorkItem(id, title, description, status);
+			}
 			return new WorkItem(title, description);
 		}
 

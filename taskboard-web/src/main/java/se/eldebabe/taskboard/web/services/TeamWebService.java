@@ -89,6 +89,26 @@ public class TeamWebService {
 		}
 
 	}
+	
+	@GET
+	@Path("/id/{id}/users")
+	public Response getAllUsersInTeam(@PathParam("id") final Long id) {
+
+		Team team = teamService.findById(id);
+		HashSet<User> users = new HashSet<>();
+
+		if (null != team) {
+			users.addAll(team.getUsers());
+			
+			ArrayList<User> userList = new ArrayList<>(users);
+			GenericEntity<List<User>> entity = new GenericEntity<List<User>>(userList){
+			};
+			return Response.ok(entity).build();
+		} else {
+			return Response.noContent().build();
+		}
+
+	}
 
 	@POST
 	public Response saveTeam(Team team) {
