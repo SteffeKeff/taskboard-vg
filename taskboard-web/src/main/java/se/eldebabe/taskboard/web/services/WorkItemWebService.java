@@ -33,8 +33,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import se.eldebabe.taskboard.data.models.Issue;
+import se.eldebabe.taskboard.data.models.User;
 import se.eldebabe.taskboard.data.models.WorkItem;
 import se.eldebabe.taskboard.data.services.IssueService;
+import se.eldebabe.taskboard.data.services.UserService;
 import se.eldebabe.taskboard.data.services.WorkItemService;
 
 @Path("workitems")
@@ -45,12 +47,14 @@ public final class WorkItemWebService {
 	private static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 	private static WorkItemService workItemService = new WorkItemService();
 	private static IssueService issueService = new IssueService();
+	private static UserService userService;
 
 	static {
 		context.scan("se.eldebabe.taskboard.data.configs");
 		context.refresh();
 		workItemService = context.getBean(WorkItemService.class);
 		issueService = context.getBean(IssueService.class);
+		userService = context.getBean(UserService.class);
 	}
 
 	@Context
@@ -169,6 +173,14 @@ public final class WorkItemWebService {
 	public final Response deleteWorkItem(@PathParam("workItemId") final Long id) {
 		WorkItem workItem = workItemService.findWorkItem(id);
 		if (null != workItem) {
+			ArrayList<User> allUsers = userService.getAllUsers();
+			for(User oneUser: allUsers){
+				if(oneUser.hasWorkItem(workItem)){
+					oneUser.removeWorkItem(workItem);
+					userService.updateUser(oneUser);
+					break;
+				}
+			}
 			workItemService.deleteWorkItem(id);
 			return Response.ok(workItem).build();
 		} else {

@@ -174,7 +174,7 @@ public class UserWebService {
 		WorkItem workItem = workItemService.findWorkItem(itemId);
 
 		if (null != user && null != workItem && user.hasWorkItem(workItem)) {
-			System.out.println(user.removeWorkItem(workItem));
+			user.removeWorkItem(workItem);
 			user = userService.updateUser(user);
 			return Response.ok(workItem).build();
 		} else {
