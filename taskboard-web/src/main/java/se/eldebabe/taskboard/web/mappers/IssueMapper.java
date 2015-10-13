@@ -31,7 +31,6 @@ import com.google.gson.stream.JsonWriter;
 
 import se.eldebabe.taskboard.data.models.Issue;
 
-@Provider
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public final class IssueMapper implements MessageBodyReader<Issue>, MessageBodyWriter<Issue> {

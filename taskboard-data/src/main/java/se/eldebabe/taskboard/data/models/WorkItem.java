@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.sun.istack.internal.NotNull;
-
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "work_items")
@@ -31,7 +29,6 @@ public class WorkItem extends AbstractEntity {
 	private Status status;
 
 	@LastModifiedDate
-	@NotNull
 	@Column(name = "date")
 	private Long date;
 

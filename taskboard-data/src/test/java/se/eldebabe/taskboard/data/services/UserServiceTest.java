@@ -27,13 +27,13 @@ public final class UserServiceTest {
 
 	@Test
 	public void assertThatUserIsSavable() {
-		user = new User("1001", "user1", "Olle", "Nilsson");
+		user = new User("1001", "user1", "pw", "Olle", "Nilsson");
 		assertThat("Added User should be returned", user, is(userService.saveUser(user)));
 	}
 
 	@Test
 	public void assertThatUserCanBeUpdated() {
-		user = new User("1002", "user2", "Olle", "Nilsson");
+		user = new User("1002", "user2", "pw", "Olle", "Nilsson");
 		user = userService.saveUser(user);
 		user.setFirstName("wiho");
 		user.setLastName("wohi");
@@ -43,7 +43,7 @@ public final class UserServiceTest {
 
 	@Test
 	public void assertThatUserCanBeDeleted() {
-		user = new User("1003", "user3", "Steff", "keff");
+		user = new User("1003", "user3", "pw", "Steff", "keff");
 		userService.saveUser(user);
 		userService.deleteUser(user.getId());
 		assertThat("userService deleted User", null, is(userService.findByUserName("user3")));
@@ -51,14 +51,14 @@ public final class UserServiceTest {
 
 	@Test
 	public void assertThatUserCanBeFoundByUserId() {
-		user = new User("1004", "user4", "Steffe", "Kung");
+		user = new User("1004", "user4", "pw", "Steffe", "Kung");
 		userService.saveUser(user);
 		assertThat("User is found by it's userID", "1004", is(userService.findUser("1004").getUserId()));
 	}
 
 	@Test
 	public void assertThatUserIsFoundByFirstname() {
-		user = new User("1005", "user5", "Firstname1", "Lastname1");
+		user = new User("1005", "user5", "pw", "Firstname1", "Lastname1");
 		userService.saveUser(user);
 		assertThat("User is found by it's firstname", "1005",
 				is(userService.findByFirstname("Firstname1").get(0).getUserId()));
@@ -66,7 +66,7 @@ public final class UserServiceTest {
 
 	@Test
 	public void assertThatUserIsFoundByLastname() {
-		user = new User("1006", "user6", "Firstname2", "Lastname2");
+		user = new User("1006", "user6", "pw", "Firstname2", "Lastname2");
 		userService.saveUser(user);
 		assertThat("User is found by it's lastname", "1006",
 				is(userService.findByLastname("Lastname2").get(0).getUserId()));
@@ -74,7 +74,7 @@ public final class UserServiceTest {
 
 	@Test
 	public void assertThatUserIsFoundByUsername() {
-		user = new User("1007", "user7", "Firstname3", "Lastname3");
+		user = new User("1007", "user7", "pw", "Firstname3", "Lastname3");
 		userService.saveUser(user);
 		assertThat("User is found by it's username", "1007", is(userService.findByUserName("user7").getUserId()));
 	}
@@ -86,7 +86,7 @@ public final class UserServiceTest {
 		WorkItem workItem1 = new WorkItem("nytt work item1", "ett litet uppdrag här!");
 		WorkItem workItem2 = new WorkItem("nytt work item2", "ett litet uppdrag här!!");
 		WorkItem workItem3 = new WorkItem("nytt work item3", "ett litet uppdrag här!!!");
-		user = new User("1010", "user1337", "steffo", "keffo");
+		user = new User("1010", "user1337", "pw", "steffo", "keffo");
 		user.addWorkItem(workItem1);
 		user.addWorkItem(workItem2);
 		user.addWorkItem(workItem3);

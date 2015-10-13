@@ -1,5 +1,7 @@
 package se.eldebabe.taskboard.data.models;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -12,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import se.eldebabe.taskboard.data.services.PasswordHash;
+
 @Entity
 @Table(name = "users")
 public class User extends AbstractEntity {
@@ -21,6 +25,9 @@ public class User extends AbstractEntity {
 
 	@Column(name = "user_name", unique = true)
 	private String userName;
+	
+	@Column
+	private String password;
 
 	@Column(name = "first_name")
 	private String firstName;
@@ -36,6 +43,21 @@ public class User extends AbstractEntity {
 	private Collection<WorkItem> workItems;
 
 	protected User() {
+	}
+	
+	public User(String userId, String userName, String password, String firstName, String lastName) {
+		this.userId = userId;
+		this.userName = userName;
+		try{
+			this.password = PasswordHash.createHash(password);
+		}catch(NoSuchAlgorithmException e){
+			e.printStackTrace();
+		}catch(InvalidKeySpecException e){
+			e.printStackTrace();
+		}
+		this.firstName = firstName;
+		this.lastName = lastName;
+		workItems = new ArrayList<>();
 	}
 
 	public void setUserId(String userId) {
@@ -58,20 +80,16 @@ public class User extends AbstractEntity {
 		this.workItems = workItems;
 	}
 
-	public User(String userId, String userName, String firstName, String lastName) {
-		this.userId = userId;
-		this.userName = userName;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		workItems = new ArrayList<>();
-	}
-
 	public String getUserId() {
 		return userId;
 	}
 
 	public String getUserName() {
 		return userName;
+	}
+	
+	public String getPassword(){
+		return password;
 	}
 
 	public String getFirstName() {

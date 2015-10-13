@@ -39,7 +39,7 @@ public final class TeamServiceTest {
 	@Test
 	public void assertThatTeamCanBeDeleted() {
 		team = new Team("deldebabe1");
-		User user = new User("id", "name", "firstname", "lastname");
+		User user = new User("id", "name", "pw", "firstname", "lastname");
 		team.addUser(user);
 		teamService.saveTeam(team);
 		teamService.delete(team.getId());
@@ -73,7 +73,7 @@ public final class TeamServiceTest {
 		team = new Team("deldebabe4");
 		teamService.saveTeam(team);
 
-		User user = new User("blabla", "userName", "firstName", "lastName");
+		User user = new User("blabla", "userName", "pw", "firstName", "lastName");
 		user.setTeam(team);
 		userService.saveUser(user);
 		assertThat("user is in team", 1, is(teamService.findTeamByName(team.getName()).getUsers().size()));
@@ -83,9 +83,9 @@ public final class TeamServiceTest {
 	public void assertThatAllUsersInATeamCanBeFetched() {
 		Team team1 = new Team("team1");
 		teamService.saveTeam(team1);
-		User user1 = new User("hejhej1", "userName1", "firstName77", "lastName77");
-		User user2 = new User("hejhej2", "userName2", "firstName88", "lastName88");
-		User user3 = new User("hejhej3", "userName3", "firstName99", "lastName99");
+		User user1 = new User("hejhej1", "userName1", "pw", "firstName77", "lastName77");
+		User user2 = new User("hejhej2", "userName2", "pw", "firstName88", "lastName88");
+		User user3 = new User("hejhej3", "userName3", "pw", "firstName99", "lastName99");
 		user1.setTeam(team1);
 		user2.setTeam(team1);
 		user3.setTeam(team1);
@@ -95,9 +95,9 @@ public final class TeamServiceTest {
 
 		Team team2 = new Team("team22");
 		teamService.saveTeam(team2);
-		User user4 = new User("tjatja1", "userName11", "firstName11", "lastName11");
-		User user5 = new User("tjatja2", "userName22", "firstName22", "lastName22");
-		User user6 = new User("tjatja3", "userName33", "firstName33", "lastName33");
+		User user4 = new User("tjatja1", "userName11", "pw", "firstName11", "lastName11");
+		User user5 = new User("tjatja2", "userName22", "pw", "firstName22", "lastName22");
+		User user6 = new User("tjatja3", "userName33", "pw", "firstName33", "lastName33");
 		user4.setTeam(team2);
 		user5.setTeam(team2);
 		user6.setTeam(team2);
@@ -112,9 +112,9 @@ public final class TeamServiceTest {
 	public void assertThatAllWorkingItemsInATeamCanBeFetched() {
 		Team team3 = new Team("teamELITE");
 		team3 = teamService.saveTeam(team3);
-		User user1 = new User("hejhej111", "userName111", "firstName777", "lastName777");
-		User user2 = new User("hejhej222", "userName222", "firstName888", "lastName888");
-		User user3 = new User("hejhej333", "userName333", "firstName999", "lastName999");
+		User user1 = new User("hejhej111", "userName111", "pw", "firstName777", "lastName777");
+		User user2 = new User("hejhej222", "userName222", "pw", "firstName888", "lastName888");
+		User user3 = new User("hejhej333", "userName333", "pw", "firstName999", "lastName999");
 		user1.setTeam(team3);
 		user2.setTeam(team3);
 		user3.setTeam(team3);
