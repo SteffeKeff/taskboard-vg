@@ -83,10 +83,11 @@ public final class UserMapper implements MessageBodyReader<User>, MessageBodyWri
 			final JsonObject userJson = json.getAsJsonObject();
 			final String userId = userJson.get("userid").getAsString();
 			final String userName = userJson.get("username").getAsString();
+			final String password = userJson.get("password").getAsString();
 			final String firstName = userJson.get("firstname").getAsString();
 			final String lastName = userJson.get("lastname").getAsString();
 
-			return new User(userId, userName, firstName, lastName);
+			return new User(userId, userName, password, firstName, lastName);
 		}
 
 		@Override

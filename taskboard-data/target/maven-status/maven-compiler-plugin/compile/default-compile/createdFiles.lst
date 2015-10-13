@@ -1,0 +1,17 @@
+se/eldebabe/taskboard/data/models/AbstractEntity.class
+se/eldebabe/taskboard/data/services/IssueService.class
+se/eldebabe/taskboard/data/repositories/IssueRepository.class
+se/eldebabe/taskboard/data/services/TeamService.class
+se/eldebabe/taskboard/data/models/WorkItem.class
+se/eldebabe/taskboard/data/services/WorkItemService.class
+se/eldebabe/taskboard/data/repositories/UserRepository.class
+se/eldebabe/taskboard/data/configs/InfrastructureConfig.class
+se/eldebabe/taskboard/data/services/PasswordHash.class
+se/eldebabe/taskboard/data/models/Issue.class
+se/eldebabe/taskboard/data/repositories/WorkItemRepository.class
+se/eldebabe/taskboard/data/models/Status.class
+se/eldebabe/taskboard/data/models/User.class
+se/eldebabe/taskboard/data/configs/ServiceConfig.class
+se/eldebabe/taskboard/data/models/Team.class
+se/eldebabe/taskboard/data/repositories/TeamRepository.class
+se/eldebabe/taskboard/data/services/UserService.class

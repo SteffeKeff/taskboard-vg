@@ -1,6 +1,7 @@
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/WorkItem.java
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/IssueRepository.java
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/IssueService.java
+/Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/services/PasswordHash.java
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/TeamRepository.java
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/models/Status.java
 /Users/Steffe/Desktop/workspace/taskboard/taskboard-data/src/main/java/se/eldebabe/taskboard/data/repositories/WorkItemRepository.java
