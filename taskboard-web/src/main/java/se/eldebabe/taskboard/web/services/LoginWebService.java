@@ -49,10 +49,13 @@ public final class LoginWebService {
 		if(user != null){
 			final String token = UUID.randomUUID().toString();
 			tokens.add(token);
-			return Response.accepted().header("Token", token).build();
+			return Response.accepted(token).build();
+			//return Response.accepted().header("Token", token).build();
 		}else{
 			return Response.status(Status.UNAUTHORIZED).build();
 		}
+		
+		
 			
 	}
 	

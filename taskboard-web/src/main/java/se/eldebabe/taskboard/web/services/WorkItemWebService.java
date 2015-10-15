@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
@@ -23,6 +24,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -190,25 +192,34 @@ public final class WorkItemWebService {
 
 	@GET
 	@Path("/status/{workItemStatus}")
-	public final Response getWorkitemWithStatus(@PathParam("workItemStatus") final String workItemStatus) {
+	public final Response getWorkitemWithStatus(@PathParam("workItemStatus") final String workItemStatus, @Context SecurityContext securityContext) {
 
-		List<WorkItem> workItems = null;
-		se.eldebabe.taskboard.data.models.Status status = null;
+		se.eldebabe.taskboard.web.filters.AuthenticationFilter.User user = (se.eldebabe.taskboard.web.filters.AuthenticationFilter.User)securityContext.getUserPrincipal();
+        
+        if(user != null){
+        	String role = user.getName();
+        	if(role.equals("user")){
+        		List<WorkItem> workItems = null;
+        		se.eldebabe.taskboard.data.models.Status status = null;
 
-		try {
-			status = se.eldebabe.taskboard.data.models.Status.valueOf(workItemStatus.toUpperCase());
-		} catch (RuntimeException IllegalArgumentException) {
-			return Response.status(406).build();
-		}
+        		try {
+        			status = se.eldebabe.taskboard.data.models.Status.valueOf(workItemStatus.toUpperCase());
+        		} catch (RuntimeException IllegalArgumentException) {
+        			return Response.status(406).build();
+        		}
 
-		workItems = workItemService.findWorkItemsWithStatus(status);
-		if (null != workItems) {
-			GenericEntity<List<WorkItem>> entity = new GenericEntity<List<WorkItem>>(workItems) {
-			};
-			return Response.ok(entity).build();
-		} else {
-			return Response.noContent().build();
-		}
+        		workItems = workItemService.findWorkItemsWithStatus(status);
+        		if (null != workItems) {
+        			GenericEntity<List<WorkItem>> entity = new GenericEntity<List<WorkItem>>(workItems) {
+        			};
+        			return Response.ok(entity).build();
+        		} else {
+        			return Response.noContent().build();
+        		}
+        	}
+        }
+        
+        return Response.status(Status.UNAUTHORIZED).build();
 	}
 
 	@GET

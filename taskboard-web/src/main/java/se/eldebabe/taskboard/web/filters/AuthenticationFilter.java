@@ -24,16 +24,14 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 		SecurityContext originalContext = requestContext.getSecurityContext();
 		
 		String token = requestContext.getHeaders().getFirst("Token");
-		
-		
-		
-		Set<String> roles = new HashSet<>();
-		
-		roles.add("USER");
-		
-		Authorizer authorizer = new Authorizer(roles, "admin", originalContext.isSecure());
 			
 		if(LoginWebService.tokens.contains(token)){
+			
+			Set<String> roles = new HashSet<>();
+			
+			roles.add("USER");
+			
+			Authorizer authorizer = new Authorizer(roles, "user", originalContext.isSecure());
 			requestContext.setSecurityContext(authorizer);
 		}
 		
@@ -69,9 +67,19 @@ public class AuthenticationFilter implements ContainerRequestFilter{
 
 		@Override
 		public Principal getUserPrincipal() {
-			return null;
+			return new User(username);
 		} 
     } 
+	
+	public static class User implements Principal {
+        String name;
 
+        public User(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getName() { return name; }   
+	}
 
 }
