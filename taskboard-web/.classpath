@@ -236,4 +236,30 @@
       <attribute value="jar:file:/Users/Steffe/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.0.0/jackson-databind-2.0.0-javadoc.jar!/" name="javadoc_location"/>
     </attributes>
   </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/auth0/java-jwt/2.0.1/java-jwt-2.0.1.jar" sourcepath="M2_REPO/com/auth0/java-jwt/2.0.1/java-jwt-2.0.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/Steffe/.m2/repository/com/auth0/java-jwt/2.0.1/java-jwt-2.0.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4.jar" sourcepath="M2_REPO/commons-codec/commons-codec/1.4/commons-codec-1.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/Steffe/.m2/repository/commons-codec/commons-codec/1.4/commons-codec-1.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/nimbusds/nimbus-jose-jwt/2.10.1/nimbus-jose-jwt-2.10.1.jar" sourcepath="M2_REPO/com/nimbusds/nimbus-jose-jwt/2.10.1/nimbus-jose-jwt-2.10.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/Steffe/.m2/repository/com/nimbusds/nimbus-jose-jwt/2.10.1/nimbus-jose-jwt-2.10.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/bouncycastle/bcprov-jdk16/1.46/bcprov-jdk16-1.46.jar" sourcepath="M2_REPO/org/bouncycastle/bcprov-jdk16/1.46/bcprov-jdk16-1.46-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/Steffe/.m2/repository/org/bouncycastle/bcprov-jdk16/1.46/bcprov-jdk16-1.46-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0.jar" sourcepath="M2_REPO/net/jcip/jcip-annotations/1.0/jcip-annotations-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/minidev/json-smart/1.1.1/json-smart-1.1.1.jar" sourcepath="M2_REPO/net/minidev/json-smart/1.1.1/json-smart-1.1.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/Users/Steffe/.m2/repository/net/minidev/json-smart/1.1.1/json-smart-1.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
 </classpath>

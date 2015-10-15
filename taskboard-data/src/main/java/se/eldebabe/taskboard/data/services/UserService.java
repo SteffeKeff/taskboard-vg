@@ -1,5 +1,7 @@
 package se.eldebabe.taskboard.data.services;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +33,16 @@ public class UserService {
 
 	public User findUser(String userId) {
 		return userRepository.findByUserId(userId);
+	}
+	
+	public User loginUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+		User user = userRepository.findByUserName(username);
+		
+		if(PasswordHash.validatePassword(password, user.getPassword())){
+			return user;
+		}else{
+			return null;
+		}
 	}
 
 	public List<User> findByFirstname(String firstName) {
