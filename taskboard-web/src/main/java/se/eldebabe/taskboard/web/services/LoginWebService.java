@@ -22,13 +22,12 @@ import se.eldebabe.taskboard.data.services.UserService;
 
 @Path("login")
 @Consumes(MediaType.APPLICATION_JSON)
-//@Produces(MediaType.APPLICATION_JSON)
 public final class LoginWebService {
 
 	private static AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 	private static UserService userService;
 	
-	public static HashSet<String> tokens = new HashSet<>();
+	public final static HashSet<String> tokens = new HashSet<>();
 
 	static {
 		context.scan("se.eldebabe.taskboard.data.configs");
@@ -37,25 +36,22 @@ public final class LoginWebService {
 	}
 	
 	@POST
-	public final Response login(String json) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public final Response login(final String json) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		
-		JsonObject jobj = new Gson().fromJson(json, JsonObject.class);
+		final JsonObject jobj = new Gson().fromJson(json, JsonObject.class);
 
-		String username = jobj.get("username").getAsString();
-		String password = jobj.get("password").getAsString();
+		final String username = jobj.get("username").getAsString();
+		final String password = jobj.get("password").getAsString();
 		
-		User user = userService.loginUser(username, password);
+		final User user = userService.loginUser(username, password);
 		
 		if(user != null){
 			final String token = UUID.randomUUID().toString();
 			tokens.add(token);
 			return Response.accepted(token).build();
-			//return Response.accepted().header("Token", token).build();
 		}else{
 			return Response.status(Status.UNAUTHORIZED).build();
 		}
-		
-		
 			
 	}
 	
